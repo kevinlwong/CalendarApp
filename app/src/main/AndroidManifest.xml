@@ -24,6 +24,7 @@
         </activity>
         <activity android:name=".ListViewActivity" />
         <activity android:name=".EventDetailActivity" />
+        <activity android:name=".EditEventActivity" />
 
     </application>
 

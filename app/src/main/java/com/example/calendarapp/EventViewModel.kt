@@ -53,4 +53,12 @@ class EventViewModel(application: Application) : AndroidViewModel(application) {
         calendar.set(Calendar.MILLISECOND, 0)
         return calendar.timeInMillis
     }
+
+    fun updateEvent(event: Event) {
+        viewModelScope.launch {
+            eventRepository.updateEvent(event)
+        }
+    }
+
+
 }

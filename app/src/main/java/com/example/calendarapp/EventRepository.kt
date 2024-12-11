@@ -41,4 +41,11 @@ class EventRepository(application: Application) {
         calendar.set(Calendar.MILLISECOND, 0)
         return calendar.timeInMillis
     }
+
+    suspend fun updateEvent(event: Event) {
+        eventDao.update(event)
+    }
+
+
+
 }

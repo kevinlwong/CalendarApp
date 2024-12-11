@@ -3,6 +3,7 @@ package com.example.calendarapp
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -10,12 +11,14 @@ import androidx.recyclerview.widget.RecyclerView
 
 class EventAdapter(
     private val onItemClick: (Event) -> Unit, // Listener for item clicks
-    private val onItemLongClick: (Event) -> Unit // Listener for long-press actions
+    private val onItemLongClick: (Event) -> Unit, // Listener for long-press actions
+    private val onEditClick: (Event) -> Unit // Listener for edit actions
 ) : ListAdapter<Event, EventAdapter.EventViewHolder>(DiffCallback()) {
 
     inner class EventViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val titleTextView: TextView = itemView.findViewById(R.id.textTitle)
         private val descriptionTextView: TextView = itemView.findViewById(R.id.textDescription)
+        private val editButton: Button = itemView.findViewById(R.id.btnEdit) // Add reference to the Edit button
 
         fun bind(event: Event) {
             titleTextView.text = event.title
@@ -30,6 +33,11 @@ class EventAdapter(
             itemView.setOnLongClickListener {
                 onItemLongClick(event) // Pass the event to the long-press listener
                 true // Indicate that the long-press event is handled
+            }
+
+            // Set click listener for the Edit button
+            editButton.setOnClickListener {
+                onEditClick(event)
             }
         }
     }
@@ -54,4 +62,6 @@ class EventAdapter(
         val event = getItem(position)
         holder.bind(event)
     }
+
+
 }

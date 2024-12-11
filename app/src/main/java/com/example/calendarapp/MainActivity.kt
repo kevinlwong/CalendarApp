@@ -40,6 +40,15 @@ class MainActivity : AppCompatActivity() {
             onItemLongClick = { event ->
                 // Show delete confirmation dialog when long-pressed
                 showDeleteConfirmationDialog(event.id)
+            },
+            onEditClick = { event ->
+                // Navigate to EditEventActivity or show an edit dialog
+                val intent = Intent(this, EditEventActivity::class.java)
+                intent.putExtra("eventId", event.id)
+                intent.putExtra("title", event.title)
+                intent.putExtra("description", event.description)
+                intent.putExtra("timestamp", event.timestamp)
+                startActivity(intent)
             }
         )
 

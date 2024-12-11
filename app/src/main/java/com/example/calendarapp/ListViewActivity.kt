@@ -1,5 +1,6 @@
 package com.example.calendarapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -55,6 +56,15 @@ class ListViewActivity : AppCompatActivity() {
             onItemLongClick = { event ->
                 // Show delete confirmation dialog
                 showDeleteConfirmationDialog(event.id)
+            },
+            onEditClick = { event ->
+                // Navigate to EditEventActivity or show an edit dialog
+                val intent = Intent(this, EditEventActivity::class.java)
+                intent.putExtra("eventId", event.id)
+                intent.putExtra("title", event.title)
+                intent.putExtra("description", event.description)
+                intent.putExtra("timestamp", event.timestamp)
+                startActivity(intent)
             }
         )
 
